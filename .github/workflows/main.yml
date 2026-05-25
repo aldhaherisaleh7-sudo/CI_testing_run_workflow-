@@ -19,6 +19,8 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-verison: '8.4'
+      - name: copy_env
+        run: cp .env.example .env    
       - name: app_key
         run: php artisan key:generate
       - name: dependcies
