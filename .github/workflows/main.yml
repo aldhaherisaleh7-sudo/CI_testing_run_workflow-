@@ -1,0 +1,27 @@
+name: testing
+
+on:
+  push:
+      branches:
+        - main
+        - dev
+  pull_request:
+        branches:
+          - main
+  workflow_dispatch:
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup
+        uses: shivammathur/setup-php@v2
+        with:
+          php-verison: '8.4'
+      - name: app_key
+        run: php artisan key:generate
+      - name: dependcies
+        run: composer install
+      - name: run tests
+        run: php artisan test
