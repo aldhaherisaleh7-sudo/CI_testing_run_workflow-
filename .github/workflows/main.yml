@@ -21,14 +21,12 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
-          extensions: mbstring, bcmath, pdo, pdo_mysql
-          coverage: none
-
+      
       - name: install_dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: copy_env
-        run: cp .env.example .env
+        run: cp env.example .env
 
       - name: generate_key
         run: php artisan key:generate
