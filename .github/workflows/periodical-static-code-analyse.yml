@@ -29,5 +29,5 @@ jobs:
         run:  composer require --dev phpstan/phpstan
 
       - name: run static code analysis
-        run:  vendor/bin/phpstan analyse -l 6 src tests
+        run:  vendor/bin/phpstan analyse -l 6 app
    
