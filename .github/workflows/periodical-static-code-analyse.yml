@@ -1,0 +1,33 @@
+name: static analysis
+
+on:
+  schedule:
+    - cron: "1 * * * *"
+      timezone: "Asia/Kuala_Lumpur"
+  workflow_dispatch:     
+    
+jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: setup php
+        uses: shivammathur/setup-php@v2
+        with:
+            php-verision: '8.4'
+
+      - name: dependancies
+        run: composer install
+
+      - name: copy_env
+        run: cp .env.example .env
+
+      - name: install phpstan
+        run:  composer require --dev phpstan/phpstan
+
+      - name: run static code analysis
+        run:  vendor/bin/phpstan analyse -l 6 src tests
+   
